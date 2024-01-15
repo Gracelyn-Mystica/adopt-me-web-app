@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import AdoptedPetContext from "./services/providers/AdoptedPetContext";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import ReactDOM from "react-dom/client";
 import SearchParams from "./pages/SearchParams";
 import Details from "./pages/Details";
@@ -17,10 +17,9 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const adoptedPet = useState(null);
   return (
     <BrowserRouter>
-      <AdoptedPetContext.Provider value={adoptedPet}>
+      <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <header>
             <Link to="/">Adopt-Me!</Link>
@@ -31,7 +30,7 @@ const App = () => {
             <Route path="/" element={<SearchParams />} />
           </Routes>
         </QueryClientProvider>
-      </AdoptedPetContext.Provider>
+      </Provider>
     </BrowserRouter>
   );
 };
