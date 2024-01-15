@@ -1,6 +1,7 @@
+import { Pet as PetType } from "../types/APIResponseTypes";
 import Pet from "./Pet";
 
-const Results = ({ pets }) => {
+const Results = ({ pets }: { pets: PetType[] }) => {
   return (
     <div className="search">
       {!pets.length ? (
@@ -14,7 +15,7 @@ const Results = ({ pets }) => {
             key={pet.id}
             id={pet.id}
             images={pet.images}
-            location={(`${pet.city}`, `${pet.state}`)}
+            location={`${pet.city},${pet.state}`}
           ></Pet>
         ))
       )}

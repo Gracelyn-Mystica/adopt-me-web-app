@@ -1,4 +1,4 @@
-import React from "react";
+import { Pet } from "./types/APIResponseTypes";
 import { useState } from "react";
 import AdoptedPetContext from "./services/providers/AdoptedPetContext";
 import ReactDOM from "react-dom/client";
@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const adoptedPet = useState(null);
+  const adoptedPet = useState(null as Pet | null);
   return (
     <BrowserRouter>
       <AdoptedPetContext.Provider value={adoptedPet}>
@@ -37,5 +37,8 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
+if (!container) {
+  throw new Error("no container to render to");
+}
 const root = ReactDOM.createRoot(container);
 root.render(<App />);
